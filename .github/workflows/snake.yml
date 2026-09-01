@@ -1,12 +1,12 @@
 name: Generate Snake Animation
 
 on:
-  # Jalankan otomatis setiap 12 jam
   schedule:
     - cron: "0 */12 * * *"
-
-  # Bisa juga dijalankan manual dari tab Actions
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   generate:
@@ -14,7 +14,6 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      # Generate snake SVG dari kontribusi GitHub
       - name: Generate Snake
         uses: Platane/snk/svg-only@v3
         with:
@@ -23,7 +22,6 @@ jobs:
             dist/github-snake.svg
             dist/github-snake-dark.svg?palette=github-dark
 
-      # Push hasil SVG ke branch "output"
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v4
         with:
